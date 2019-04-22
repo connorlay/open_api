@@ -17,7 +17,9 @@ defmodule OpenAPI.Object do
 
   @type name :: atom | String.t()
 
-  @type options :: []
+  @type options :: [
+          required: boolean()
+        ]
 
   @type field :: {atom, type, options}
 
@@ -32,6 +34,29 @@ defmodule OpenAPI.Object do
     quote do
       defstruct(unquote(struct_keys))
       def __object__, do: unquote(fields)
+
+      defimpl Inspect, for: __MODULE__ do
+        def inspect(object, opts) do
+          inspect_object(object, opts)
+        end
+      end
     end
+  end
+
+  import Inspect.Algebra
+
+  def inspect_object(object, opts) do
+    inner =
+      object
+      |> Map.from_struct()
+      |> Enum.reject(&is_nil(elem(&1, 1)))
+
+    name =
+      object.__struct__
+      |> inspect()
+      |> String.split(".")
+      |> List.last()
+
+    concat(["#", name, "<", to_doc(inner, opts), ">"])
   end
 end

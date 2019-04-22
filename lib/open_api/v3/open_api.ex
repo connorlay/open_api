@@ -6,12 +6,12 @@ defmodule OpenAPI.V3.OpenAPI do
   use OpenAPI.Object
 
   defobject [
-    {:openapi, :string, []},
-    {:info, OpenAPI.V3.Info, []},
+    {:openapi, :string, [required: true]},
+    {:info, OpenAPI.V3.Info, [required: true]},
     {:servers, [OpenAPI.V3.Server], []},
-    {:paths, OpenAPI.V3.Paths, []},
+    {:paths, %{string: {OpenAPI.V3.Reference, OpenAPI.V3.PathItem}}, [required: true]},
     {:components, OpenAPI.V3.Components, []},
-    {:security, [OpenAPI.V3.SecurityRequirement], []},
+    {:security, [%{string: [:string]}], []},
     {:tags, [OpenAPI.V3.Tag], []},
     {:external_docs, OpenAPI.V3.ExternalDocumentation, []}
   ]

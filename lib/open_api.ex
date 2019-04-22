@@ -9,6 +9,7 @@ defmodule OpenAPI do
   """
 
   def decode(input) do
+    OpenAPI.Decoder.parse(input, OpenAPI.V3.OpenAPI)
   end
 
   def validate(document) do

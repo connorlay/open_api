@@ -20,47 +20,47 @@ defmodule OpenAPI.Decoder do
   end
 
   # Primitives
-  defp coerce(value, :string, _location) when is_binary(value) do
-    {:ok, value}
+  defp coerce(term, :string, _location) when is_binary(term) do
+    {:ok, term}
   end
 
-  defp coerce(value, :number, _location) when is_number(value) do
-    {:ok, value}
+  defp coerce(term, :number, _location) when is_number(term) do
+    {:ok, term}
   end
 
-  defp coerce(value, :boolean, _location) when is_boolean(value) do
-    {:ok, value}
+  defp coerce(term, :boolean, _location) when is_boolean(term) do
+    {:ok, term}
   end
 
-  defp coerce(value, :integer, _location) when is_integer(value) do
-    {:ok, value}
+  defp coerce(term, :integer, _location) when is_integer(term) do
+    {:ok, term}
   end
 
-  defp coerce(value, _type, _location) when is_nil(value) do
-    {:ok, value}
+  defp coerce(term, _type, _location) when is_nil(term) do
+    {:ok, term}
   end
 
   # Containers
-  defp coerce(value, [module], location) when is_list(value) do
-    value
+  defp coerce(term, [module], location) when is_list(term) do
+    term
     |> Enum.map(&coerce(&1, module, location))
     |> reduce_coercions()
   end
 
-  defp coerce(value, {left, right}, location) do
-    case coerce(value, left, location) do
+  defp coerce(term, {left, right}, location) do
+    case coerce(term, left, location) do
       {:error, _errors} ->
-        coerce(value, right, location)
+        coerce(term, right, location)
 
-      {:ok, value} ->
-        {:ok, value}
+      {:ok, term} ->
+        {:ok, term}
     end
   end
 
-  defp coerce(value, map, location) when is_map(value) and is_map(map) do
+  defp coerce(term, map, location) when is_map(term) and is_map(map) do
     [{key, value} | _] = Map.to_list(map)
 
-    value
+    term
     |> Enum.map(fn {k, v} ->
       case {coerce(k, key, location), coerce(v, value, location)} do
         {{:ok, k}, {:ok, v}} ->
@@ -81,13 +81,13 @@ defmodule OpenAPI.Decoder do
   end
 
   # Objects
-  defp coerce(value, module, location) when is_map(value) do
+  defp coerce(term, module, location) when is_map(term) do
     module.__object__
     |> Enum.map(fn {name, type, opts} ->
       sname = Atom.to_string(name)
       location = [name | location]
 
-      case coerce(Map.get(value, sname), type, location) do
+      case coerce(Map.get(term, sname), type, location) do
         {:ok, coerced} ->
           {:ok, {name, coerced}}
 
@@ -99,9 +99,9 @@ defmodule OpenAPI.Decoder do
     |> after_coercion(&struct(module, &1))
   end
 
-  defp coerce(value, type, location) do
+  defp coerce(term, type, location) do
     error = %OpenAPI.DecoderError{
-      message: "Failed to coerved #{inspect(value)} to type #{inspect(type)}",
+      message: "Failed to coerce #{inspect(term)} to type #{inspect(type)}",
       location: fmt_location(location)
     }
 
@@ -110,7 +110,7 @@ defmodule OpenAPI.Decoder do
 
   # Pretty prints the current location in the document tree
   defp fmt_location(location) do
-    "##{location |> Enum.reverse() |> Enum.join("/")}"
+    "#/#{location |> Enum.reverse() |> Enum.join("/")}"
   end
 
   # Converts a list of coercions into one coercion
