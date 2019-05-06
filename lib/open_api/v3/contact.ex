@@ -5,9 +5,16 @@ defmodule OpenAPI.V3.Contact do
 
   use OpenAPI.Object
 
-  defobject [
-    {:name, :string, []},
-    {:url, :string, []},
-    {:email, :string, []}
-  ]
+  defobject name: {
+              :string,
+              []
+            },
+            url: {
+              :string,
+              []
+            },
+            email: {
+              :string,
+              []
+            }
 end

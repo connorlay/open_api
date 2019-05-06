@@ -5,8 +5,12 @@ defmodule OpenAPI.V3.License do
 
   use OpenAPI.Object
 
-  defobject [
-    {:name, :string, []},
-    {:url, :string, []}
-  ]
+  defobject name: {
+              :string,
+              []
+            },
+            url: {
+              :string,
+              []
+            }
 end

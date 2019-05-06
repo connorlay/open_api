@@ -9,17 +9,48 @@ defmodule OpenAPI.V3.Header do
 
   use OpenAPI.Object
 
-  defobject [
-    {:description, :string, []},
-    {:required, :boolean, []},
-    {:deprecated, :boolean, []},
-    {:allow_empty_value, :boolean, []},
-    {:style, :string, []},
-    {:explode, :boolean, []},
-    {:allow_reserved, :boolean, []},
-    {:schema, {OpenAPI.V3.Schema, OpenAPI.V3.Reference}, []},
-    {:example, :any, []},
-    {:examples, %{string: {OpenAPI.V3.Example, OpenAPI.V3.Reference}}, []},
-    {:content, %{string: OpenAPI.V3.MediaType}, []}
-  ]
+  defobject description: {
+              :string,
+              []
+            },
+            required: {
+              :boolean,
+              []
+            },
+            deprecated: {
+              :boolean,
+              []
+            },
+            allow_empty_value: {
+              :boolean,
+              []
+            },
+            style: {
+              :string,
+              []
+            },
+            explode: {
+              :boolean,
+              []
+            },
+            allow_reserved: {
+              :boolean,
+              []
+            },
+            schema: {
+              {:union, [OpenAPI.V3.Schema, OpenAPI.V3.Reference]},
+              []
+            },
+            example: {
+              :any,
+              []
+            },
+            examples: {
+              {:map, [:string, {:union, [OpenAPI.V3.Example, OpenAPI.V3.Reference]}]},
+              []
+            },
+            content: {
+              {:map, [:string, OpenAPI.V3.MediaType]},
+              []
+            }
 end

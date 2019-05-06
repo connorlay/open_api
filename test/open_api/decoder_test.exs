@@ -11,6 +11,16 @@ defmodule OpenAPI.DecoderTest do
       license: %OpenAPI.V3.License{
         name: "MIT"
       }
+    },
+    servers: [
+      %OpenAPI.V3.Server{
+        url: "http://petstore.swagger.io/v1"
+      }
+    ],
+    components: %OpenAPI.V3.Components{},
+    paths: %{
+      "/pets" => %OpenAPI.V3.Reference{},
+      "/pets/{petId}" => %OpenAPI.V3.Reference{}
     }
   }
 

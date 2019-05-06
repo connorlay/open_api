@@ -5,43 +5,126 @@ defmodule OpenAPI.V3.Schema do
 
   use OpenAPI.Object
 
-  defobject [
-    # JSON Schema
-    {:title, :string, []},
-    {:multiple_of, :integer, []},
-    {:maximum, :integer, []},
-    {:exclusive_maximum, :boolean, []},
-    {:minimum, :integer, []},
-    {:exclusive_minimum, :boolean, []},
-    {:max_length, :integer, []},
-    {:min_length, :integer, []},
-    {:pattern, :string, []},
-    {:max_items, :integer, []},
-    {:min_items, :integer, []},
-    {:unique_items, :boolean, []},
-    {:max_properties, :integer, []},
-    {:min_properties, :integer, []},
-    {:required, [:string], []},
-    {:enum, [:any], []},
-    {:type, :string, []},
-    {:all_of, [{OpenAPI.V3.Reference, __MODULE__}], []},
-    {:one_of, [{OpenAPI.V3.Reference, __MODULE__}], []},
-    {:any_of, [{OpenAPI.V3.Reference, __MODULE__}], []},
-    {:not, __MODULE__, []},
-    {:items, {OpenAPI.V3.Reference, __MODULE__}, []},
-    {:properties, %{string: {OpenAPI.V3.Reference, __MODULE__}}, []},
-    {:additional_properties, {:boolean, {OpenAPI.V3.Reference, __MODULE__}}, []},
-    {:description, :string, []},
-    {:format, :string, []},
-    {:default, :any, []},
-    # Open API Schema
-    {:nullable, :boolean, []},
-    {:descriminator, OpenAPI.V3.Discriminator, []},
-    {:read_only, :boolean, []},
-    {:write_only, :boolean, []},
-    {:xml, OpenAPI.V3.XML, []},
-    {:external_docs, OpenAPI.V3.ExternalDocumentation, []},
-    {:example, :any, []},
-    {:deprecated, :boolean, []}
-  ]
+  defobject title: {
+              :string,
+              []
+            },
+            # JSON Schema fields
+            multiple_of: {
+              :integer,
+              []
+            },
+            maximum: {
+              :integer,
+              []
+            },
+            exclusive_minimum: {
+              :boolean,
+              []
+            },
+            max_length: {
+              :integer,
+              []
+            },
+            min_length: {
+              :integer,
+              []
+            },
+            unique_items: {
+              :boolean,
+              []
+            },
+            max_properties: {
+              :integer,
+              []
+            },
+            min_properties: {
+              :integer,
+              []
+            },
+            required: {
+              {:list, [:string]},
+              []
+            },
+            enum: {
+              {:list, [:any]},
+              []
+            },
+            type: {
+              :string,
+              []
+            },
+            all_of: {
+              {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+              []
+            },
+            one_of: {
+              {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+              []
+            },
+            any_of: {
+              {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+              []
+            },
+            not: {
+              __MODULE__,
+              []
+            },
+            items: {
+              {:union, [__MODULE__, OpenAPI.V3.Reference]},
+              []
+            },
+            properties: {
+              {:map, [:string, {:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+              []
+            },
+            additional_properties: {
+              {:union, [:boolean, {:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            format: {
+              :string,
+              []
+            },
+            default: {
+              :any,
+              []
+            },
+            # Open API fields
+            nullable: {
+              :boolean,
+              []
+            },
+            discriminator: {
+              OpenAPI.V3.Discriminator,
+              []
+            },
+            read_only: {
+              :boolean,
+              []
+            },
+            write_only: {
+              :boolean,
+              []
+            },
+            xml: {
+              OpenAPI.V3.XML,
+              []
+            },
+            external_docs: {
+              OpenAPI.V3.ExternalDocumentation,
+              []
+            },
+            example: {
+              :any,
+              []
+            },
+            deprecated: {
+              :boolean,
+              []
+            }
 end

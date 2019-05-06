@@ -5,18 +5,52 @@ defmodule OpenAPI.V3.PathItem do
 
   use OpenAPI.Object
 
-  defobject [
-    {:summary, :string, []},
-    {:description, :string, []},
-    {:get, OpenAPI.V3.Operation, []},
-    {:put, OpenAPI.V3.Operation, []},
-    {:post, OpenAPI.V3.Operation, []},
-    {:delete, OpenAPI.V3.Operation, []},
-    {:options, OpenAPI.V3.Operation, []},
-    {:head, OpenAPI.V3.Operation, []},
-    {:patch, OpenAPI.V3.Operation, []},
-    {:trace, OpenAPI.V3.Operation, []},
-    {:servers, [OpenAPI.V3.Server], []},
-    {:parameters, [{OpenAPI.V3.Reference, OpenAPI.V3.Parameter}], []}
-  ]
+  defobject summary: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            get: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            put: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            post: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            delete: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            options: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            head: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            patch: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            trace: {
+              OpenAPI.V3.Operation,
+              []
+            },
+            servers: {
+              {:list, [OpenAPI.V3.Server]},
+              []
+            },
+            parameters: {
+              {:list, [{:union, [OpenAPI.V3.Parameter, OpenAPI.V3.Reference]}]},
+              []
+            }
 end

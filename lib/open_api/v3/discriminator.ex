@@ -7,8 +7,12 @@ defmodule OpenAPI.V3.Discriminator do
 
   use OpenAPI.Object
 
-  defobject [
-    {:property_name, :string, []},
-    {:mapping, %{string: :string}, []}
-  ]
+  defobject property_name: {
+              :string,
+              []
+            },
+            mapping: {
+              {:map, [:string, :string]},
+              []
+            }
 end

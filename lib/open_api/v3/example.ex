@@ -6,10 +6,20 @@ defmodule OpenAPI.V3.Example do
 
   use OpenAPI.Object
 
-  defobject [
-    {:summary, :string, []},
-    {:description, :string, []},
-    {:value, :any, []},
-    {:external_value, :string, []}
-  ]
+  defobject summary: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            value: {
+              :any,
+              []
+            },
+            external_value: {
+              :string,
+              []
+            }
 end

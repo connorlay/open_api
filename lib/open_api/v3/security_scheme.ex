@@ -5,14 +5,36 @@ defmodule OpenAPI.V3.SecurityScheme do
 
   use OpenAPI.Object
 
-  defobject [
-    {:type, :string, []},
-    {:description, :string, []},
-    {:name, :string, []},
-    {:in, :string, []},
-    {:scheme, :string, []},
-    {:bearer_format, :string, []},
-    {:flows, OpenAPI.V3.OAuthFlows, []},
-    {:open_id_connect_url, :string, []}
-  ]
+  defobject title: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            name: {
+              :string,
+              []
+            },
+            in: {
+              :string,
+              []
+            },
+            scheme: {
+              :string,
+              []
+            },
+            bearer_format: {
+              :string,
+              []
+            },
+            flows: {
+              OpenAPI.V3.OAuthFlows,
+              []
+            },
+            open_id_connect_url: {
+              :string,
+              []
+            }
 end

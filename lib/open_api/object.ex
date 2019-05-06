@@ -11,7 +11,7 @@ defmodule OpenAPI.Object do
 
   @type primitive :: :string | :number | :boolean | :integer | module
 
-  @type container :: [type, ...] | %{type => type} | {type, type}
+  @type container :: {:map | :union | :list, [type]}
 
   @type type :: primitive | container
 
@@ -26,10 +26,7 @@ defmodule OpenAPI.Object do
   @doc false
   defmacro defobject(fields) do
     # TODO read from config for extension types
-    struct_keys =
-      Enum.map(fields, fn
-        {:{}, _, [name, _type, _opts]} -> name
-      end)
+    struct_keys = Keyword.keys(fields)
 
     quote do
       defstruct(unquote(struct_keys))
@@ -51,12 +48,6 @@ defmodule OpenAPI.Object do
       |> Map.from_struct()
       |> Enum.reject(&is_nil(elem(&1, 1)))
 
-    name =
-      object.__struct__
-      |> inspect()
-      |> String.split(".")
-      |> List.last()
-
-    concat(["#", name, "<", to_doc(inner, opts), ">"])
+    concat(["#", inspect(object.__struct__), "<", to_doc(inner, opts), ">"])
   end
 end

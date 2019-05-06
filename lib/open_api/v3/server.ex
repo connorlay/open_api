@@ -5,9 +5,16 @@ defmodule OpenAPI.V3.Server do
 
   use OpenAPI.Object
 
-  defobject [
-    {:url, :string, []},
-    {:description, :string, []},
-    {:variables, %{string: OpenAPI.V3.ServerVariable}, []}
-  ]
+  defobject url: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            variables: {
+              {:map, [:string, OpenAPI.V3.ServerVariable]},
+              []
+            }
 end

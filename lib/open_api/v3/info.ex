@@ -5,12 +5,28 @@ defmodule OpenAPI.V3.Info do
 
   use OpenAPI.Object
 
-  defobject [
-    {:title, :string, []},
-    {:description, :string, []},
-    {:terms_of_service, :string, []},
-    {:contact, OpenAPI.V3.Contact, []},
-    {:license, OpenAPI.V3.License, []},
-    {:version, :string, []}
-  ]
+  defobject title: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            terms_of_service: {
+              :string,
+              []
+            },
+            contact: {
+              OpenAPI.V3.Contact,
+              []
+            },
+            license: {
+              OpenAPI.V3.License,
+              []
+            },
+            version: {
+              :string,
+              []
+            }
 end

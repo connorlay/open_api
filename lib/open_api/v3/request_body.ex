@@ -5,9 +5,16 @@ defmodule OpenAPI.V3.RequestBody do
 
   use OpenAPI.Object
 
-  defobject [
-    {:description, :string, []},
-    {:content, %{string: OpenAPI.V3.MediaType}, []},
-    {:required, :boolean, []}
-  ]
+  defobject description: {
+              :string,
+              []
+            },
+            content: {
+              {:map, [OpenAPI.V3.MediaType]},
+              []
+            },
+            required: {
+              :boolean,
+              []
+            }
 end

@@ -5,10 +5,20 @@ defmodule OpenAPI.V3.Response do
 
   use OpenAPI.Object
 
-  defobject [
-    {:description, :string, []},
-    {:headers, %{string: {OpenAPI.V3.Header, OpenAPI.V3.Reference}}, []},
-    {:content, %{string: OpenAPI.V3.MediaType}, []},
-    {:links, %{string: {OpenAPI.V3.Link, OpenAPI.V3.Reference}}, []}
-  ]
+  defobject description: {
+              :string,
+              []
+            },
+            headers: {
+              {:map, [:string, {:union, [OpenAPI.V3.Header, OpenAPI.V3.Reference]}]},
+              []
+            },
+            content: {
+              {:map, [:string, OpenAPI.V3.MediaType]},
+              []
+            },
+            links: {
+              {:map, [:string, {:union, [OpenAPI.V3.Link, OpenAPI.V3.Reference]}]},
+              []
+            }
 end

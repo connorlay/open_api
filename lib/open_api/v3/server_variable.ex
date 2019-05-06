@@ -5,9 +5,16 @@ defmodule OpenAPI.V3.ServerVariable do
 
   use OpenAPI.Object
 
-  defobject [
-    {:enum, [:string], []},
-    {:default, :string, []},
-    {:description, :string, []}
-  ]
+  defobject enum: {
+              {:list, [:string]},
+              []
+            },
+            default: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            }
 end

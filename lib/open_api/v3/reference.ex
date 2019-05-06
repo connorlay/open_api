@@ -5,7 +5,8 @@ defmodule OpenAPI.V3.Reference do
 
   use OpenAPI.Object
 
-  defobject [
-    {:"$ref", :string, [required: true]}
-  ]
+  defobject "$ref": {
+              :string,
+              [required: true]
+            }
 end

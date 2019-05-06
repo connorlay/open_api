@@ -5,9 +5,16 @@ defmodule OpenAPI.V3.Tag do
 
   use OpenAPI.Object
 
-  defobject [
-    {:name, :string, []},
-    {:description, :string, []},
-    {:external_docs, OpenAPI.V3.ExternalDocumentation, []}
-  ]
+  defobject name: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            external_docs: {
+              OpenAPI.V3.ExternalDocumentation,
+              []
+            }
 end

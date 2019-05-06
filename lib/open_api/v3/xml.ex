@@ -7,11 +7,24 @@ defmodule OpenAPI.V3.XML do
 
   use OpenAPI.Object
 
-  defobject [
-    {:name, :string, []},
-    {:namespace, :string, []},
-    {:prefix, :string, []},
-    {:attribute, :boolean, []},
-    {:wrapped, :boolean, []}
-  ]
+  defobject name: {
+              :string,
+              []
+            },
+            namespace: {
+              :string,
+              []
+            },
+            prefix: {
+              :string,
+              []
+            },
+            attribute: {
+              :boolean,
+              []
+            },
+            wrapped: {
+              :boolean,
+              []
+            }
 end

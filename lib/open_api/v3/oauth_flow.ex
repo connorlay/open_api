@@ -5,10 +5,20 @@ defmodule OpenAPI.V3.OAuthFlow do
 
   use OpenAPI.Object
 
-  defobject [
-    {:authorization_url, :string, []},
-    {:token_url, :string, []},
-    {:refresh_url, :string, []},
-    {:scopes, %{string: :string}, []}
-  ]
+  defobject authorization_url: {
+              :string,
+              []
+            },
+            token_url: {
+              :string,
+              []
+            },
+            refresh_url: {
+              :string,
+              []
+            },
+            scopes: {
+              {:map, [:string, :string]},
+              []
+            }
 end

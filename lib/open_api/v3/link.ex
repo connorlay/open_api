@@ -9,12 +9,28 @@ defmodule OpenAPI.V3.Link do
 
   use OpenAPI.Object
 
-  defobject [
-    {:operation_ref, :string, []},
-    {:operation_id, :string, []},
-    {:parameters, %{string: :any}, []},
-    {:request_body, :any, []},
-    {:description, :string, []},
-    {:server, OpenAPI.V3.Server, []}
-  ]
+  defobject operation_ref: {
+              :string,
+              []
+            },
+            operation_id: {
+              :string,
+              []
+            },
+            parameters: {
+              {:map, [:string, :any]},
+              []
+            },
+            request_body: {
+              :any,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            server: {
+              OpenAPI.V3.Server,
+              []
+            }
 end

@@ -5,8 +5,12 @@ defmodule OpenAPI.V3.ExternalDocumentation do
 
   use OpenAPI.Object
 
-  defobject [
-    {:description, :string, []},
-    {:url, :string, []}
-  ]
+  defobject description: {
+              :string,
+              []
+            },
+            url: {
+              :string,
+              []
+            }
 end

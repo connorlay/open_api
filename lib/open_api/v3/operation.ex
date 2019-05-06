@@ -5,18 +5,53 @@ defmodule OpenAPI.V3.Operation do
 
   use OpenAPI.Object
 
-  defobject [
-    {:tags, [:string], []},
-    {:summary, :string, []},
-    {:description, :string, []},
-    {:external_docs, OpenAPI.V3.ExternalDocumentation, []},
-    {:operation_id, :string, []},
-    {:parameters, [{OpenAPI.V3.Reference, OpenAPI.V3.Parameter}], []},
-    {:request_body, {OpenAPI.V3.Reference, OpenAPI.V3.RequestBody}, []},
-    {:responses, %{string: OpenAPI.V3.Response}, []},
-    {:callbacks, %{string: {OpenAPI.V3.Reference, %{string: OpenAPI.V3.PathItem}}}, []},
-    {:deprecated, :boolean, []},
-    {:security, [%{string: [:string]}], []},
-    {:servers, [OpenAPI.V3.Server], []}
-  ]
+  defobject tags: {
+              {:list, [:string]},
+              []
+            },
+            summary: {
+              :string,
+              []
+            },
+            description: {
+              :string,
+              []
+            },
+            external_docs: {
+              OpenAPI.V3.ExternalDocumentation,
+              []
+            },
+            operation_id: {
+              :string,
+              []
+            },
+            parameters: {
+              {:list, [{:union, [OpenAPI.V3.Parameter, OpenAPI.V3.Reference]}]},
+              []
+            },
+            request_body: {
+              {:union, [OpenAPI.V3.RequestBody, OpenAPI.V3.Reference]},
+              []
+            },
+            responses: {
+              {:map, [:string, OpenAPI.V3.Response]},
+              []
+            },
+            callbacks: {
+              {:map,
+               [:string, {:union, [{:map, [:string, OpenAPI.V3.PathItem]}, OpenAPI.V3.Reference]}]},
+              []
+            },
+            deprecated: {
+              :boolean,
+              []
+            },
+            security: {
+              {:list, [{:map, [:string, {:list, [:string]}]}]},
+              []
+            },
+            servers: {
+              {:list, [OpenAPI.V3.Server]},
+              []
+            }
 end
