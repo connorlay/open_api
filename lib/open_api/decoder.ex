@@ -41,13 +41,13 @@ defmodule OpenAPI.Decoder do
   end
 
   # Containers
-  defp coerce(term, [module], location) when is_list(term) do
+  defp coerce(term, {:list, [type]}, location) when is_list(term) do
     term
-    |> Enum.map(&coerce(&1, module, location))
+    |> Enum.map(&coerce(&1, type, location))
     |> reduce_coercions()
   end
 
-  defp coerce(term, {left, right}, location) do
+  defp coerce(term, {:union, [left, right]}, location) do
     case coerce(term, left, location) do
       {:error, _errors} ->
         coerce(term, right, location)
@@ -57,9 +57,7 @@ defmodule OpenAPI.Decoder do
     end
   end
 
-  defp coerce(term, map, location) when is_map(term) and is_map(map) do
-    [{key, value} | _] = Map.to_list(map)
-
+  defp coerce(term, {:map, [key, value]}, location) when is_map(term) do
     term
     |> Enum.map(fn {k, v} ->
       case {coerce(k, key, location), coerce(v, value, location)} do
@@ -83,7 +81,7 @@ defmodule OpenAPI.Decoder do
   # Objects
   defp coerce(term, module, location) when is_map(term) do
     module.__object__
-    |> Enum.map(fn {name, type, opts} ->
+    |> Enum.map(fn {name, {type, opts}} ->
       sname = Atom.to_string(name)
       location = [name | location]
 
