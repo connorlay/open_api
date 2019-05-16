@@ -6,7 +6,7 @@ defmodule OpenAPI.V3.MediaType do
   use OpenAPI.Object
 
   defobject schema: {
-              {:union, [OpenAPI.V3.Schema, OpenAPI.V3.Reference]},
+              {:union, [OpenAPI.V3.Reference, OpenAPI.V3.Schema]},
               []
             },
             example: {
@@ -14,7 +14,7 @@ defmodule OpenAPI.V3.MediaType do
               []
             },
             examples: {
-              {:map, [:string, {:union, [OpenAPI.V3.Example, OpenAPI.V3.Reference]}]},
+              {:map, [:string, {:union, [OpenAPI.V3.Reference, OpenAPI.V3.Example]}]},
               []
             },
             encoding: {

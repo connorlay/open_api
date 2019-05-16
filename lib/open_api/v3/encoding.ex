@@ -10,7 +10,7 @@ defmodule OpenAPI.V3.Encoding do
               []
             },
             headers: {
-              {:map, [:string, {:union, [OpenAPI.V3.Header, OpenAPI.V3.Reference]}]},
+              {:map, [:string, {:union, [OpenAPI.V3.Reference, OpenAPI.V3.Header]}]},
               []
             },
             style: {

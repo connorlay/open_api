@@ -89,6 +89,7 @@ defmodule OpenAPI.Decoder do
 
   # Objects
   defp coerce(term, module, _opts, location) when is_map(term) do
+    # TODO: need to validate if undefined keywords are present
     module.__object__
     |> Enum.map(fn {name, {type, opts}} ->
       sname = Atom.to_string(name)

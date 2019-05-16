@@ -10,7 +10,7 @@ defmodule OpenAPI.V3.Response do
               []
             },
             headers: {
-              {:map, [:string, {:union, [OpenAPI.V3.Header, OpenAPI.V3.Reference]}]},
+              {:map, [:string, {:union, [OpenAPI.V3.Reference, OpenAPI.V3.Header]}]},
               []
             },
             content: {
@@ -18,7 +18,7 @@ defmodule OpenAPI.V3.Response do
               []
             },
             links: {
-              {:map, [:string, {:union, [OpenAPI.V3.Link, OpenAPI.V3.Reference]}]},
+              {:map, [:string, {:union, [OpenAPI.V3.Reference, OpenAPI.V3.Link]}]},
               []
             }
 end

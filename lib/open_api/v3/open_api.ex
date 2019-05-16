@@ -18,7 +18,7 @@ defmodule OpenAPI.V3.OpenAPI do
               []
             },
             paths: {
-              {:map, [:string, {:union, [OpenAPI.V3.PathItem, OpenAPI.V3.Reference]}]},
+              {:map, [:string, {:union, [OpenAPI.V3.Reference, OpenAPI.V3.PathItem]}]},
               [required: true]
             },
             components: {

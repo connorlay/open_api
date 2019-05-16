@@ -26,11 +26,11 @@ defmodule OpenAPI.V3.Operation do
               []
             },
             parameters: {
-              {:list, [{:union, [OpenAPI.V3.Parameter, OpenAPI.V3.Reference]}]},
+              {:list, [{:union, [OpenAPI.V3.Reference, OpenAPI.V3.Parameter]}]},
               []
             },
             request_body: {
-              {:union, [OpenAPI.V3.RequestBody, OpenAPI.V3.Reference]},
+              {:union, [OpenAPI.V3.Reference, OpenAPI.V3.RequestBody]},
               []
             },
             responses: {
@@ -39,7 +39,7 @@ defmodule OpenAPI.V3.Operation do
             },
             callbacks: {
               {:map,
-               [:string, {:union, [{:map, [:string, OpenAPI.V3.PathItem]}, OpenAPI.V3.Reference]}]},
+               [:string, {:union, [{:map, [:string, OpenAPI.V3.Reference, OpenAPI.V3.PathItem]}]}]},
               []
             },
             deprecated: {

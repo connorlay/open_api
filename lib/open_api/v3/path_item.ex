@@ -50,7 +50,7 @@ defmodule OpenAPI.V3.PathItem do
               []
             },
             parameters: {
-              {:list, [{:union, [OpenAPI.V3.Parameter, OpenAPI.V3.Reference]}]},
+              {:list, [{:union, [OpenAPI.V3.Reference, OpenAPI.V3.Parameter]}]},
               []
             }
 end
