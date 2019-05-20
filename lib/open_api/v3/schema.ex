@@ -92,32 +92,32 @@ defmodule OpenAPI.V3.Schema do
       []
     },
     all_of: {
-      {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+      {:list, [{:union, [OpenAPI.V3.Reference, __MODULE__]}]},
       []
     },
     one_of: {
-      {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+      {:list, [{:union, [OpenAPI.V3.Reference, __MODULE__]}]},
       []
     },
     any_of: {
-      {:list, [{:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+      {:list, [{:union, [OpenAPI.V3.Reference, __MODULE__]}]},
       []
     },
     not: {
-      {:union, [__MODULE__, OpenAPI.V3.Reference]},
+      {:union, [OpenAPI.V3.Reference, __MODULE__]},
       []
     },
     items: {
       # must be present if schema.type == "array"
-      {:union, [__MODULE__, OpenAPI.V3.Reference]},
+      {:union, [OpenAPI.V3.Reference, __MODULE__]},
       []
     },
     properties: {
-      {:map, [:string, {:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+      {:map, [:string, {:union, [OpenAPI.V3.Reference, __MODULE__]}]},
       []
     },
     additional_properties: {
-      {:union, [:boolean, {:union, [__MODULE__, OpenAPI.V3.Reference]}]},
+      {:union, [:boolean, {:union, [OpenAPI.V3.Reference, __MODULE__]}]},
       []
     },
     description: {
